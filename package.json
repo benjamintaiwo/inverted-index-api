@@ -1,0 +1,33 @@
+{
+  "name": "inverted-index",
+  "version": "1.0.0",
+  "description": "inverted index search functionality",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "gulp-install": "^1.1.0",
+    "node": "^0.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamintaiwo/inverted-index-api.git"
+  },
+  "author": "Benjamin Taiwo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjamintaiwo/inverted-index-api/issues"
+  },
+  "homepage": "https://github.com/benjamintaiwo/inverted-index-api#readme"
+}
