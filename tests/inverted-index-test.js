@@ -16,3 +16,23 @@ describe('Inverted Index Suite', () => {
       expect(typeof (newIndex)).toBe('object');
     });
   });
+  describe('Tokenize String', () => {
+    it('Ensures it is available in class InvertedIndex', () => {
+      expect(InvertedIndex.tokenize).toBeDefined();
+    });
+    it('Ensures it returns an array containing alphabets only', () => {
+      expect(InvertedIndex.tokenize(sampleSentence)).not.toContain('&');
+    });
+    it('Ensures it returns an array containing the correct number of words', () => {
+      expect(InvertedIndex.tokenize(sampleSentence).length).toBe(10);
+    });
+  });
+
+  describe('Unique Words', () => {
+    it('Ensures It is available in class InvertedIndex', () => {
+      expect(InvertedIndex.uniqueWords).toBeDefined();
+    });
+    it('Ensures it returns an array of words without duplicates', () => {
+      expect(InvertedIndex.uniqueWords(sampleSentence).length).toBe(9);
+    });
+  });
