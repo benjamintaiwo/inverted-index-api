@@ -5,7 +5,7 @@ describe('Inverted Index Suite', () => {
   //Create an instance of the Index class
   const newIndex = new InvertedIndex();
   const emptyBook = [];
-  const sampleSentence = 'Tenses are %correct but define each #well';
+  const demoWords = 'Tenses are %correct but define each #well';
   const multipleSearch = 'Let fear and doubt dissolve quickly';
   newIndex.createIndex('books', books);
 
@@ -22,10 +22,10 @@ describe('Inverted Index Suite', () => {
       expect(InvertedIndex.tokenize).toBeDefined();
     });
     it('Ensures it returns an array containing alphabets only', () => {
-      expect(InvertedIndex.tokenize(sampleSentence)).not.toContain('&');
+      expect(InvertedIndex.tokenize(demoWords)).not.toContain('&');
     });
     it('Ensures it returns an array containing the correct number of words', () => {
-      expect(InvertedIndex.tokenize(sampleSentence).length).toBe(10);
+      expect(InvertedIndex.tokenize(demoWords).length).toBe(10);
     });
   });
 
@@ -34,7 +34,7 @@ describe('Inverted Index Suite', () => {
       expect(InvertedIndex.uniqueWords).toBeDefined();
     });
     it('Ensures it returns an array of words without duplicates', () => {
-      expect(InvertedIndex.uniqueWords(sampleSentence).length).toBe(9);
+      expect(InvertedIndex.uniqueWords(demoWords).length).toBe(9);
     });
   });
 
@@ -49,3 +49,24 @@ describe('Inverted Index Suite', () => {
         .not.toBe('JSON file is Empty');
     });
   });
+
+  describe('Populate Index', () => {
+    it('Ensures Index is created', () => {
+      expect(newIndex.index.books).toBeDefined();
+    });
+    it('should accurately map words to their document location', () => {
+      expect(Object.keys(newIndex.index).length).toBe(1);
+      expect(Object.keys(newIndex.index.books).length).toBe(25);
+      expect(newIndex.index.books.An).toEqual([0]);
+      expect(newIndex.index.books.the).toEqual([0, 1]);
+    });
+  });
+
+  describe('Get Index', () => {
+    it('should return an accurate index Object of the indexed file', () => {
+      expect(newIndex.getIndex('books')).toBeDefined();
+      expect(Object.keys(newIndex.getIndex('books')).length).toBe(25);
+    });
+  });
+
+  
