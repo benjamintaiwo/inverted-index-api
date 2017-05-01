@@ -16,6 +16,7 @@ describe('Inverted Index Suite', () => {
       expect(typeof (newIndex)).toBe('object');
     });
   });
+
   describe('Tokenize String', () => {
     it('Ensures it is available in class InvertedIndex', () => {
       expect(InvertedIndex.tokenize).toBeDefined();
@@ -34,5 +35,17 @@ describe('Inverted Index Suite', () => {
     });
     it('Ensures it returns an array of words without duplicates', () => {
       expect(InvertedIndex.uniqueWords(sampleSentence).length).toBe(9);
+    });
+  });
+
+  describe('Read Book Data', () => {
+    it('Ensure createIndex is available in class InvertedIndex', () => {
+      expect(newIndex.createIndex).toBeDefined();
+    });
+    it('Ensures the JSON file is not empty', () => {
+      expect(newIndex.createIndex('emptyBook', emptyBook))
+        .toBe('JSON file is Empty');
+      expect(newIndex.createIndex('books', books))
+        .not.toBe('JSON file is Empty');
     });
   });
