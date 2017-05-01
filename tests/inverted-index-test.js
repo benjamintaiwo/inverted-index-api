@@ -15,15 +15,32 @@ describe('Inverted Index Suite', () => {
       expect(newIndex instanceof Object).toBe(true);
       expect(typeof (newIndex)).toBe('object');
     });
+    
+    it('Ensures a valid JSON array', () => {
+      const isValid = InvertedIndex.isValidFile(Books);
+      expect(isValid).toBe(true);
+    });
+
+    it('Ensure proper error response when file is invalid or empty', () => {
+      const isValid = InvertedIndex.isValidFile(InvalidJSON);
+      expect(isValid).toBe(false);
+    });
+
   });
 
   describe('Tokenize String', () => {
     it('Ensures it is available in class InvertedIndex', () => {
       expect(InvertedIndex.tokenize).toBeDefined();
     });
+    
     it('Ensures it returns an array containing alphabets only', () => {
       expect(InvertedIndex.tokenize(demoWords)).not.toContain('%');
     });
+
+    it('Ensures it returns an array containing alphabets only', () => {
+      expect(InvertedIndex.tokenize(demoWords)).not.toContain('%');
+    });
+
     it('Ensures it returns an array containing the correct number of words', () => {
       expect(InvertedIndex.tokenize(demoWords).length).toBe(10);
     });
