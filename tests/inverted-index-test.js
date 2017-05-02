@@ -1,8 +1,9 @@
+/*  eslint linebreak-style: ["error", "windows"]*/
 const books = require('../fixtures/books');
-const books = require('../fixtures/invalidJson');
+const invalidJson = require('../fixtures/invalidJson');
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
-  //Create an instance of the Index class
+  //  Create an instance of the Index class
   const newIndex = new InvertedIndex();
   const emptyBook = [];
   const demoWords = 'Tenses are %correct but define each #well';
@@ -15,9 +16,8 @@ describe('Inverted Index Suite', () => {
       expect(newIndex instanceof Object).toBe(true);
       expect(typeof (newIndex)).toBe('object');
     });
-    
     it('Ensures a valid JSON array', () => {
-      const isValid = InvertedIndex.isValidFile(Books);
+      const isValid = InvertedIndex.isValidFile(books);
       expect(isValid).toBe(true);
     });
 
@@ -25,14 +25,12 @@ describe('Inverted Index Suite', () => {
       const isValid = InvertedIndex.isValidFile(invalidJson);
       expect(isValid).toBe(false);
     });
-
   });
 
   describe('Tokenize String', () => {
     it('Ensures it is available in class InvertedIndex', () => {
       expect(InvertedIndex.tokenize).toBeDefined();
     });
-    
     it('Ensures it returns an array containing alphabets only', () => {
       expect(InvertedIndex.tokenize(demoWords)).not.toContain('%');
     });
@@ -93,37 +91,37 @@ describe('Inverted Index Suite', () => {
     it('Ensures index returns the correct results when searched',
       () => {
         expect(newIndex.searchIndex('An', 'books')).toEqual({
-          'An': [0]
+          An: [0]
         });
         expect(newIndex.searchIndex('the', 'books')).toEqual({
-          'the': [0, 1]
+          the: [0, 1]
         });
         expect(newIndex.searchIndex('inertia', 'books')).toEqual({
-          'inertia': 'Not Found'
+          inertia: 'Not Found'
         });
         expect(newIndex.searchIndex(sentenceSearch, 'books')).toEqual({
-          'It': 'Not Found',
-          'seeks': [0],
-          'mighty': 'Not Found',
-          'string': [0, 1],
-          'also' : [1]
+          It: 'Not Found',
+          seeks: [0],
+          mighty: 'Not Found',
+          string: [0, 1],
+          also: [1]
         });
     });
     it('Ensures it searches all indexed files if a filename/key is not passed',
       () => {
-        expect(newIndex.searchIndex('An')).toEqual([ { 'An': [0] } ]);
-        expect(newIndex.searchIndex('the')).toEqual([ {
-          'the': [0, 1]
-        } ]);
-        expect(newIndex.searchIndex('inertia')).toEqual([ {
-          'inertia': 'Not Found'
-        } ]);
+        expect(newIndex.searchIndex('An')).toEqual([{ An: [0] }]);
+        expect(newIndex.searchIndex('the')).toEqual([{
+          the: [0, 1]
+        }]);
+        expect(newIndex.searchIndex('inertia')).toEqual([{
+          inertia: 'Not Found'
+        }]);
         expect(newIndex.searchIndex(sentenceSearch)).toEqual([
-          {'It': 'Not Found' },
-          {  'seeks': [0]},
-          { 'mighty': 'Not Found' },
-          { 'string': [0, 1] },
-          { 'also' : [1] }
+          { It: 'Not Found' },
+          { seeks: [0]},
+          { mighty: 'Not Found' },
+          { string: [0, 1] },
+          { also: [1] }
         ]);
       });
   });
