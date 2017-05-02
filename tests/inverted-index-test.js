@@ -1,5 +1,5 @@
-const books = require('fixture/books');
-
+const books = require('../fixtures/books');
+const books = require('../fixtures/invalidJson');
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
   //Create an instance of the Index class
@@ -22,7 +22,7 @@ describe('Inverted Index Suite', () => {
     });
 
     it('Ensure proper error response when file is invalid or empty', () => {
-      const isValid = InvertedIndex.isValidFile(InvalidJSON);
+      const isValid = InvertedIndex.isValidFile(invalidJson);
       expect(isValid).toBe(false);
     });
 
