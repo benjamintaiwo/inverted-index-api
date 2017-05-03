@@ -1,14 +1,22 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
+/* eslint no-undef: "error"*/
+const InvertedIndex = require('../src/inverted-index.js');
 const books = require('../fixtures/books');
 const invalidJson = require('../fixtures/invalidJson');
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
+  const newIndex = {};
   //  Create an instance of the Index class
-  const newIndex = new InvertedIndex();
+  beforeEach(() => {
+    this.invertedIndex = new InvertedIndex();
+    this.newIndex = this.invertedIndex.createIndex('books', books);
+  });
+
+  /* const newIndex = new InvertedIndex();*/
   const emptyBook = [];
   const demoWords = 'Tenses are %correct but define each #well';
   const sentenceSearch = 'It seeks mighty string also';
-  newIndex.createIndex('books', books);
+  /* newIndex.createIndex('books', books); */
 
   describe('Class Inverted Index', () => {
     it('should be a class', () => {
@@ -118,7 +126,7 @@ describe('Inverted Index Suite', () => {
         }]);
         expect(newIndex.searchIndex(sentenceSearch)).toEqual([
           { It: 'Not Found' },
-          { seeks: [0]},
+          { seeks: [0] },
           { mighty: 'Not Found' },
           { string: [0, 1] },
           { also: [1] }
