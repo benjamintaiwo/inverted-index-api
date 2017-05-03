@@ -1,5 +1,5 @@
-/**
- * Inverted index class
+/*  eslint linebreak-style: ["error", "windows"]*/
+/* Inverted index class
  */
 class InvertedIndex {
   /**
@@ -55,7 +55,7 @@ class InvertedIndex {
     this.index[fileName] = fileIndex;
   }
 
-  
   getIndex(fileName) {
     return this.index[fileName];
   }
+}
