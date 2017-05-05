@@ -1,23 +1,20 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 const InvertedIndex = require('../src/inverted-index.js');
-const books = require('../fixtures/books');
+const books = require('../fixtures/books.json');
 const invalidJson = require('../fixtures/invalidJson');
+const emptyBook = require('../fixtures/emptyBook.json');
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
-  const newIndex = {};
   //  Create an instance of the Index class
-  beforeEach(() => {
-    this.invertedIndex = new InvertedIndex();
-    this.newIndex = this.invertedIndex.createIndex('books', books);
-  });
+  /* beforeEach(() => {
+    this.InvertedIndex = new InvertedIndex();
+    this.index = this.invertedIndex.createIndex('books', books);
+  });*/
 
-  /* const newIndex = new InvertedIndex();*/
-  const emptyBook = [];
-  const demoWords = 'Tenses are %correct but define each #well';
-  const sentenceSearch = 'It seeks mighty string also';
-  /* newIndex.createIndex('books', books); */
-
+  const newIndex = new InvertedIndex();
+  const demoWords = 'inquiry #into the %wealth';
+  newIndex.createIndex('books', books); 
   describe('Class Inverted Index', () => {
     it('should be a class', () => {
       expect(newIndex instanceof InvertedIndex).toBe(true);
@@ -44,11 +41,11 @@ describe('Inverted Index Suite', () => {
     });
 
     it('Ensures it returns an array containing alphabets only', () => {
-      expect(InvertedIndex.tokenize(demoWords)).not.toContain('%');
+      expect(InvertedIndex.tokenize(demoWords)).not.toContain('#');
     });
 
     it('Ensures it returns an array containing the correct number of words', () => {
-      expect(InvertedIndex.tokenize(demoWords).length).toBe(10);
+      expect(InvertedIndex.tokenize(demoWords).length).toBe(4);
     });
   });
 
@@ -57,7 +54,7 @@ describe('Inverted Index Suite', () => {
       expect(InvertedIndex.uniqueWords).toBeDefined();
     });
     it('Ensures it returns an array of words without duplicates', () => {
-      expect(InvertedIndex.uniqueWords(demoWords).length).toBe(9);
+      expect(InvertedIndex.uniqueWords(demoWords).length).toBe(4);
     });
   });
 
@@ -79,16 +76,16 @@ describe('Inverted Index Suite', () => {
     });
     it('Ensures words are mapped to their document location', () => {
       expect(Object.keys(newIndex.index).length).toBe(1);
-      expect(Object.keys(newIndex.index.books).length).toBe(25);
-      expect(newIndex.index.books.An).toEqual([0]);
-      expect(newIndex.index.books.the).toEqual([0, 1]);
+      expect(Object.keys(newIndex.index.books).length).toBe(22);
+      expect(newIndex.index.books.inquiry).toEqual([0]);
+      expect(newIndex.index.books.this).toEqual([0, 1]);
     });
   });
 
   describe('Get Index', () => {
     it('Ensures index is correct', () => {
       expect(newIndex.getIndex('books')).toBeDefined();
-      expect(Object.keys(newIndex.getIndex('books')).length).toBe(25);
+      expect(Object.keys(newIndex.getIndex('books')).length).toBe(22);
     });
   });
 
@@ -98,40 +95,30 @@ describe('Inverted Index Suite', () => {
     });
     it('Ensures index returns the correct results when searched',
       () => {
-        expect(newIndex.searchIndex('An', 'books')).toEqual({
-          An: [0]
+        expect(newIndex.searchIndex('inquiry', 'books')).toEqual({
+          'inquiry': [0]
         });
-        expect(newIndex.searchIndex('the', 'books')).toEqual({
-          the: [0, 1]
+        expect(newIndex.searchIndex('this', 'books')).toEqual({
+          'this': [0, 1]
         });
         expect(newIndex.searchIndex('inertia', 'books')).toEqual({
-          inertia: 'Not Found'
+          'inertia': 'Not Found'
         });
-        expect(newIndex.searchIndex(sentenceSearch, 'books')).toEqual({
-          It: 'Not Found',
-          seeks: [0],
-          mighty: 'Not Found',
-          string: [0, 1],
-          also: [1]
+        expect(newIndex.searchIndex('third first nations', 'books')).toEqual({
+          'third':[1],
+          'first': [1],
+          'nations': [0]
         });
     });
     it('Ensures it searches all indexed files if a filename/key is not passed',
       () => {
-        expect(newIndex.searchIndex('An')).toEqual([{ An: [0] }]);
-        expect(newIndex.searchIndex('the')).toEqual([{
-          the: [0, 1]
+        expect(newIndex.searchIndex('inquiry')).toEqual([{ 'inquiry': [0] }]);
+        expect(newIndex.searchIndex('this')).toEqual([{
+          'this': [0, 1]
         }]);
         expect(newIndex.searchIndex('inertia')).toEqual([{
-          inertia: 'Not Found'
+          'inertia': 'Not Found'
         }]);
-        expect(newIndex.searchIndex(sentenceSearch)).toEqual([
-          { It: 'Not Found' },
-          { seeks: [0] },
-          { mighty: 'Not Found' },
-          { string: [0, 1] },
-          { also: [1] }
-        ]);
       });
   });
 });
-

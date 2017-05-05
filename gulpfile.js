@@ -6,5 +6,5 @@ gulp.task('run-tests', () => {
   .pipe(jasmine());
 });
 
-gulp.task('default', [ 'run-tests' ]);
+//gulp.task('default', [ 'run-tests' ]);
 
