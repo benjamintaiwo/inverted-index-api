@@ -13,9 +13,10 @@ class InvertedIndex {
     this.index = {};
   }
 
-  /**
+  /*
+   * method to convert words strings into an array
    * @param{String} words - String to tokenize
-   * @return{Array} list of words devoid of special characters or symbols
+   * @return{Array} list of words without of special characters or symbols
    */
   static tokenize(words) {
     return words.trim().replace(/-/g, ' ')
@@ -25,24 +26,24 @@ class InvertedIndex {
       .sort();
   }
    /**
-   * @param {any} fileToIndex - content of file to search.
-   * @return {Boolean} - return true or false
-   * @memberOf InvertedIndex
+   * @param {any} content - file contents for searching.
+   * @return {Boolean} - return true or false to validate JSON file
    */
-  static isValidFile(fileToIndex) {
-    let check = true;
-    if (fileToIndex.length > 0 &&
-      fileToIndex[0].title && fileToIndex[0].text) {
-      check = true;
+  static isValidFile(content) {
+    let validate = true;
+    if (content.length > 0 &&
+      content[0].title && content[0].text) {
+      validate = true;
     } else {
-      check = false;
+      validate = false;
     }
-    return check;
+    return validate;
   }
 
   /**
+   * method to get the tokens of the content without duplicates
    * @param{String} words - The string to be filtered
-   * @return{Array} tokens - Without duplicated words
+   * @return{Array} tokens - words devoid of duplicates
    */
   static uniqueWords(words) {
     const tokens = InvertedIndex.tokenize(words);
@@ -50,38 +51,39 @@ class InvertedIndex {
   }
 
   /**
+   * method that create index for the documents in the file
    * @param{String} fileName - The name of the file to be indexed
-   * @param{Array} fileToIndex - Array of contents of the JSON file to index
-   * @return{Object} index - That maps words to locations(documents)
+   * @param{Array} content - JSON Array of filecontent to be indexed
+   * @return{Object} indexResult - That maps words to their document location indices
    */
-  createIndex(fileName, fileToIndex) {
-    const wordsToIndex = [];
-    const fileIndex = {};
-    const fileLength = fileToIndex.length;
-    if (fileLength === 0) {
+  createIndex(fileName, content) {
+    const IndexResult = {};
+    const toIndex = [];
+    if (content.length === 0) {
       return 'JSON file is Empty';
     }
-    fileToIndex.forEach((document) => {
+    content.forEach((document) => {
       if (document.text) {
-        wordsToIndex
+        toIndex
           .push(`${document.title.toLowerCase()} ${document.text
             .toLowerCase()}`);
       }
     });
-    const uniqueContent = InvertedIndex.uniqueWords(wordsToIndex.join(' '));
-    uniqueContent.forEach((word) => {
-      fileIndex[word] = [];
-      wordsToIndex.forEach((document, indexPosition) => {
+    const newContent = InvertedIndex.uniqueWords(toIndex.join(' '));
+    newContent.forEach((word) => {
+      IndexResult[word] = [];
+      toIndex.forEach((document, indexPosition) => {
         if (document.indexOf(word) > -1) {
-          fileIndex[word].push(indexPosition);
+          IndexResult[word].push(indexPosition);
         }
       });
     });
-    this.index[fileName] = fileIndex;
+    this.index[fileName] = IndexResult;
   }
 
   /**
-   * @param{String} fileName - The name of the file whose index is required
+   * method to return index created
+   * @param{String} fileName is required
    * @return{Object} index - The correct mapping of words to locations for specified file
    */
   getIndex(fileName) {
@@ -89,36 +91,37 @@ class InvertedIndex {
   }
 
   /**
+   * method to search for words or sentence in the document
    * @param{String} searchQuery - Words to search for
    * @param{String} indexToSearch - Index to query
-   * @return{Object} searchResults - Maps searched words to document locations
+   * @return{Object} wordFound - Maps searched words to document locations
    */
   searchIndex(searchQuery, indexToSearch) {
     searchQuery = searchQuery.toLowerCase();
-    const multipleFileResults = [];
-    let singleSearchResult = {};
+    let wordFound = {};
+    const sentenceSearch = [];
     const searchTerms = InvertedIndex.uniqueWords(searchQuery);
     searchTerms.forEach((word) => {
       const errorMessage = 'Not Found';
       if (indexToSearch) {
         // eslint-disable-next-line
         this.index[indexToSearch][word] ?
-          (singleSearchResult[word] = this.index[indexToSearch][word]) :
-          (singleSearchResult[word] = errorMessage);
+          (wordFound[word] = this.index[indexToSearch][word]) :
+          (wordFound[word] = errorMessage);
       } else {
         Object.keys(this.index).forEach((key) => {
         // eslint-disable-next-line
           this.index[key][word] ?
-            (singleSearchResult[word] = this.index[key][word]) :
-            (singleSearchResult[word] = errorMessage);
+            (wordFound[word] = this.index[key][word]) :
+            (wordFound[word] = errorMessage);
 
-          multipleFileResults.push(singleSearchResult);
-          singleSearchResult = {};
+          sentenceSearch.push(wordFound);
+          wordFound = {};
         });
       }
     });
-    return (multipleFileResults.length === 0 ?
-      singleSearchResult : multipleFileResults);
+    return (sentenceSearch.length === 0 ?
+      wordFound : sentenceSearch);
   }
 
 }
