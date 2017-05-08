@@ -1,9 +1,9 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
-const InvertedIndex = require('../src/inverted-index.js');
-const books = require('../fixtures/books.json');
-const invalidJson = require('../fixtures/invalidJson');
-const emptyBook = require('../fixtures/emptyBook.json');
+import InvertedIndex from '../src/inverted-index';
+import books from '../fixtures/books.json';
+import invalidJson from '../fixtures/invalidJson.json';
+import emptyBook from '../fixtures/emptyBook.json';
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
   //  Create an instance of the Index class
@@ -14,7 +14,7 @@ describe('Inverted Index Suite', () => {
 
   const newIndex = new InvertedIndex();
   const demoWords = 'inquiry #into the %wealth';
-  newIndex.createIndex('books', books); 
+  newIndex.createIndex('books', books);
   describe('Class Inverted Index', () => {
     it('should be a class', () => {
       expect(newIndex instanceof InvertedIndex).toBe(true);
