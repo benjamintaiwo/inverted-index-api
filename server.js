@@ -38,7 +38,17 @@ appRouter.route('/create')
     }
   });
 });
-
+appRouter.route('/search')
+    .post((req, res) => {
+      const searchTerm = req.body.searchTerms;
+      const fileNames = req.body.fileName;
+      if (fileNames === undefined) {
+        newIndex.searchIndex(newIndex.searchQuery, searchTerm);
+      } else {
+        newIndex.searchIndex(newIndex.searchQuery, fileNames, searchTerm);
+      }
+      res.status(200).json(newIndex.wordFound);
+    });
     
 
 
