@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import jasmine from 'gulp-jasmine';
 import jasmineNode from 'gulp-jasmine-node';
+
 import nodemon from 'gulp-nodemon';
 import injectModules from 'gulp-inject-modules';
 import istanbul from 'gulp-istanbul';

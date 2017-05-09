@@ -1,8 +1,8 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 
-//import path from 'path';
-//import fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 /**
  * Inverted index class
  */
@@ -19,7 +19,7 @@ class InvertedIndex {
  * @description read the uploaded file
  * @param {string} fileName
  * @return {Object} content
- 
+ */
   static readFile(fileName) {
     try {
       JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
