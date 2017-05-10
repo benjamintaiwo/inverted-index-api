@@ -10,9 +10,11 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/', router);
+
 app.listen(process.env.PORT_TEST, () => {
     console.log('server now running at ' + process.env.PORT_TEST);
 });
+
 // load the routes
-app.use('/', router);
 export default app;

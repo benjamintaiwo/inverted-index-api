@@ -1,8 +1,8 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 
-// import path from 'path';
-// import fs from 'fs';
+
+
 /**
  * Inverted index class
  */
@@ -56,15 +56,14 @@ class InvertedIndex {
  * @param {string} fileName
  * @return {Object} content
  */
-  /*readFile(fileName) {
+  /*static readFile(fileName) {
     try {
       JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
-    }
-    catch (e) {
+    } catch (e) {
       return 'Invalid JSON file';
     }
     return JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
-  } */
+  }*/
 
 
 
@@ -110,11 +109,12 @@ class InvertedIndex {
 
   /**
    * method to search for words or sentence in the document
+   * @param{String} fileName for searching
    * @param{String} searchQuery - Words to search for
    * @param{String} indexToSearch - Index to query
    * @return{Object} wordFound - Maps searched words to document locations
    */
-  searchIndex(searchQuery, indexToSearch) {
+  searchIndex(fileName, searchQuery, indexToSearch) {
     searchQuery = searchQuery.toLowerCase();
     let wordFound = {};
     const sentenceSearch = [];
