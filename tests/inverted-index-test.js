@@ -1,5 +1,8 @@
+'use strict';
+
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
+
 import InvertedIndex from '../src/inverted-index';
 import books from '../fixtures/books.json';
 import invalidJson from '../fixtures/invalidJson.json';
