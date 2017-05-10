@@ -1,8 +1,8 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 
-//import path from 'path';
-//import fs from 'fs';
+// import path from 'path';
+// import fs from 'fs';
 /**
  * Inverted index class
  */
@@ -13,21 +13,6 @@ class InvertedIndex {
   constructor() {
     // Object to hold the index
     this.index = {};
-  }
-
-  /**
- * @description read the uploaded file
- * @param {string} fileName
- * @return {Object} content
- 
-  static readFile(fileName) {
-    try {
-      JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
-    }
-    catch (e) {
-      return 'Invalid JSON file';
-    }
-    return JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
   }
   /*
    * method to convert words strings into an array
@@ -65,6 +50,23 @@ class InvertedIndex {
     const tokens = InvertedIndex.tokenize(words);
     return tokens.filter((item, index) => tokens.indexOf(item) === index);
   }
+
+/**
+ * @description read the uploaded file
+ * @param {string} fileName
+ * @return {Object} content
+ */
+  /*readFile(fileName) {
+    try {
+      JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
+    }
+    catch (e) {
+      return 'Invalid JSON file';
+    }
+    return JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
+  } */
+
+
 
   /**
    * method that create index for the documents in the file
