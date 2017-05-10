@@ -114,7 +114,7 @@ class InvertedIndex {
    * @param{String} indexToSearch - Index to query
    * @return{Object} wordFound - Maps searched words to document locations
    */
-  searchIndex(fileName, searchQuery, indexToSearch) {
+  searchIndex(searchQuery, indexToSearch) {
     searchQuery = searchQuery.toLowerCase();
     let wordFound = {};
     const sentenceSearch = [];
