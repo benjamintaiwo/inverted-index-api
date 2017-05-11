@@ -55,10 +55,7 @@ router.post('/api/search', search.single(), (req, res) => {
   // if (this.index(req.file.originalname) !== undefined) {
   res.json(newIndex.searchIndex(req.body.fileName, req.body.searchQuery));
 });
-  /* const searchQuery = `${req.body.searchQuery}`;
-  const searchResult = newIndex.searchIndex(searchQuery);
-  res.json(searchResult);*/
 
- //  res.json(newIndex.searchIndex(req.body.searchQuery, newIndex.index));
+
 
 export default router;
