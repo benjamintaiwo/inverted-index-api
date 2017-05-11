@@ -1,6 +1,8 @@
+
+/* eslint no-undef: "error"*/
+
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-import jasmine from 'gulp-jasmine';
 import jasmineNode from 'gulp-jasmine-node';
 
 import nodemon from 'gulp-nodemon';
@@ -15,10 +17,12 @@ gulp.task('babel', () => {
   .pipe(gulp.dest('dist'));
 });
 // this runs the jasmine tests through an already transpiled file
-gulp.task('run-tests', ['babel'], () => {
-  gulp.src(['tests/inverted-index-test.js'])
-  .pipe(jasmine());
-  // .pipe(exit());
+gulp.task('run-tests', () => {
+  gulp.src(['./tests/inverted-index-test.js'])
+  .pipe(babel())
+  .pipe(injectModules())
+  .pipe(jasmineNode());
+   // pipe(exit());
 });
 // this starts the server at the specified port in .env file
 gulp.task('serve', ['babel'], () => {
@@ -47,4 +51,14 @@ gulp.task('coverage', () => {
       })
       .pipe(exit());
     });
+<<<<<<< HEAD
 });
+=======
+});
+
+gulp.task('coveralls', ['run-test'], () => {
+  return gulp.src('coverage/lcov.info')
+    .pipe(coveralls())
+    .pipe(exit());
+});
+>>>>>>> develop

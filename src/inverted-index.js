@@ -1,8 +1,11 @@
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 
+<<<<<<< HEAD
 import path from 'path';
 import fs from 'fs';
+=======
+>>>>>>> develop
 /**
  * Inverted index class
  */
@@ -14,6 +17,7 @@ class InvertedIndex {
     // Object to hold the index
     this.index = {};
   }
+<<<<<<< HEAD
 
   /**
  * @description read the uploaded file
@@ -29,15 +33,17 @@ class InvertedIndex {
     }
     return JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
   }
+=======
+>>>>>>> develop
   /*
+  * tokenize re
    * method to convert words strings into an array
    * @param{String} words - String to tokenize
    * @return{Array} list of words without of special characters or symbols
    */
   static tokenize(words) {
     return words.trim().replace(/-/g, ' ')
-      .replace(/[.,\/#!$%\^&@\*;:'{}=\_`~()]/g, '')
-      .toLowerCase()
+      .replace(/[.,/#!$%^&@*;:'{}=_`~()]/g, '').toLowerCase()
       .split(' ')
       .sort();
   }
@@ -80,9 +86,7 @@ class InvertedIndex {
     }
     content.forEach((document) => {
       if (document.text) {
-        toIndex
-          .push(`${document.title.toLowerCase()} ${document.text
-            .toLowerCase()}`);
+        toIndex.push(`${document.title.toLowerCase()} ${document.text.toLowerCase()}`);
       }
     });
     const newContent = InvertedIndex.uniqueWords(toIndex.join(' '));
@@ -102,27 +106,27 @@ class InvertedIndex {
    * @param{String} fileName is required
    * @return{Object} index - The correct mapping of words to locations for specified file
    */
-  getIndex(fileName) {
-    return this.index[fileName];
+  getIndex() {
+    return this.index;
   }
 
   /**
    * method to search for words or sentence in the document
+   *  @param{String} fileName - fileIndex to query
    * @param{String} searchQuery - Words to search for
-   * @param{String} indexToSearch - Index to query
    * @return{Object} wordFound - Maps searched words to document locations
    */
-  searchIndex(searchQuery, indexToSearch) {
+  searchIndex(fileName, searchQuery) {
     searchQuery = searchQuery.toLowerCase();
     let wordFound = {};
     const sentenceSearch = [];
     const searchTerms = InvertedIndex.uniqueWords(searchQuery);
     searchTerms.forEach((word) => {
       const errorMessage = 'Not Found';
-      if (indexToSearch) {
+      if (fileName) {
         // eslint-disable-next-line
-        this.index[indexToSearch][word] ?
-          (wordFound[word] = this.index[indexToSearch][word]) :
+        this.index[fileName][word] ?
+          (wordFound[word] = this.index[fileName][word]) :
           (wordFound[word] = errorMessage);
       } else {
         Object.keys(this.index).forEach((key) => {
@@ -134,11 +138,11 @@ class InvertedIndex {
           sentenceSearch.push(wordFound);
           wordFound = {};
         });
+        // this.index[fileName] = wordFound;
       }
     });
     return (sentenceSearch.length === 0 ?
       wordFound : sentenceSearch);
   }
-
 }
 module.exports = InvertedIndex;
