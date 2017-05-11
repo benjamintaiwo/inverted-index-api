@@ -1,6 +1,5 @@
+[![Build Status](https://travis-ci.org/benjamintaiwo/inverted-index-api.svg?branch=develop)](https://travis-ci.org/benjamintaiwo/inverted-index-api)[![Coverage Status](https://coveralls.io/repos/github/benjamintaiwo/inverted-index-api/badge.svg?branch=master)](https://coveralls.io/github/benjamintaiwo/inverted-index-api?branch=master)
 # inverted-index-api
-Inverted Index Search Functionalilty
-[![Coverage Status](https://coveralls.io/repos/github/benjamintaiwo/inverted-index-api/badge.svg?branch=master)](https://coveralls.io/github/benjamintaiwo/inverted-index-api?branch=master)
 
 # Introduction
 An inverted index object that takes a JSON array of text objects and creates an index from the array. The index allows a user to search for text blocks in the array that contain a specified collection of words.
