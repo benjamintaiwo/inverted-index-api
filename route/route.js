@@ -5,9 +5,9 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import InvertedIndex from '../src/inverted-index';
-
-const upload = multer({ dest: 'fixtures/' }).single('content'); // specify the uploading directory
-const search = multer();       // This is used for search endpoint since no uploading is involved
+// specify the uploading directory
+const upload = multer({ dest: 'fixtures/' }).single('content');
+const search = multer();
 const router = express.Router();
 const newIndex = new InvertedIndex();
 
@@ -42,17 +42,13 @@ router.post('/api/create', (req, res) => {
         newIndex.createIndex(req.file.originalname, readFile(filePath));
         res.json(newIndex.getIndex());
       }
+      // uploaded file should be deleted the index is created
       fs.unlinkSync(path.join('fixtures', req.file.filename));
-      // delete the uploaded file once the index is created
     }
   });
 });
 // search endpoint
 router.post('/api/search', search.single(), (req, res) => {
-  // const filePath = (req.file.filename).toString();
-  // newIndex.createIndex(req.file.originalname, readFile(filePath));
-  // newIndex.getIndex(req.file.originalname);
-  // if (this.index(req.file.originalname) !== undefined) {
   res.json(newIndex.searchIndex(req.body.fileName, req.body.searchQuery));
 });
 
