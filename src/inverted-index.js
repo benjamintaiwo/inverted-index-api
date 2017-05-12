@@ -12,9 +12,8 @@ class InvertedIndex {
     // Object to hold the index
     this.index = {};
   }
-  /*
-  * tokenize re
-   * method to convert words strings into an array
+  /**
+   * tokenize method to convert words strings into an array
    * @param{String} words - String to tokenize
    * @return{Array} list of words without of special characters or symbols
    */
@@ -115,7 +114,6 @@ class InvertedIndex {
           sentenceSearch.push(wordFound);
           wordFound = {};
         });
-        // this.index[fileName] = wordFound;
       }
     });
     return (sentenceSearch.length === 0 ?
@@ -123,3 +121,4 @@ class InvertedIndex {
   }
 }
 module.exports = InvertedIndex;
+
