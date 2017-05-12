@@ -17,30 +17,10 @@
     "url": "https://github.com/benjamintaiwo/inverted-index-api/issues"
   },
   "homepage": "https://github.com/benjamintaiwo/inverted-index-api#readme",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-plugin-path-variable": "^1.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-babel-istanbul": "^1.6.0",
-    "gulp-babel-minify": "^0.1.12",
-    "gulp-coveralls": "^0.1.4",
-    "gulp-exit": "0.0.2",
-    "gulp-inject-modules": "^1.0.0",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-jasmine": "^2.4.2",
-    "gulp-jasmine-node": "^1.0.7",
-    "gulp-nodemon": "^2.2.1",
-    "supertest": "^3.0.0"
-  },
+  "devDependencies": {},
+
   "dependencies": {
+    "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -58,6 +38,18 @@
     "multer": "^1.3.0",
     "node": "^0.0.0",
     "require": "^2.4.20",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "babel-plugin-path-variable": "^1.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "gulp-babel-istanbul": "^1.6.0",
+    "gulp-babel-minify": "^0.1.12",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-exit": "0.0.2",
+    "gulp-inject-modules": "^1.0.0",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jasmine-node": "^1.0.7",
+    "gulp-nodemon": "^2.2.1"
   }
 }
