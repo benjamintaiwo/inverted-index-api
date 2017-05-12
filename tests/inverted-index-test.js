@@ -6,12 +6,6 @@ import invalidJson from '../fixtures/invalidJson.json';
 import emptyBook from '../fixtures/emptyBook.json';
 // A test suite to read book data
 describe('Inverted Index Suite', () => {
-  //  Create an instance of the Index class
-  /* beforeEach(() => {
-    this.InvertedIndex = new InvertedIndex();
-    this.index = this.invertedIndex.createIndex('books', books);
-  });*/
-
   const newIndex = new InvertedIndex();
   const demoWords = 'inquiry #into the %wealth';
   newIndex.createIndex('books', books);
@@ -96,28 +90,19 @@ describe('Inverted Index Suite', () => {
     it('Ensures index returns the correct results when searched',
       () => {
         expect(newIndex.searchIndex('books', 'inquiry')).toEqual({
-          'inquiry': [0]
+          inquiry: [0]
         });
         expect(newIndex.searchIndex('books', 'this')).toEqual({
-          'this': [0, 1]
+          this: [0, 1]
         });
         expect(newIndex.searchIndex('books', 'inertial')).toEqual({
-          'inertial': 'Not Found'
+          inertial: 'Not Found'
         });
         expect(newIndex.searchIndex('books', 'third first nations')).toEqual({
-          'third': [1],
-          'first': [1],
-          'nations': [0]
+          third: [1],
+          first: [1],
+          nations: [0]
         });
       });
-    /* it('Ensures it searches all indexed files if a filename/key is not passed', () => {
-      expect(newIndex.searchIndex('inquiry')).toEqual([{ inquiry: [0] }]);
-      expect(newIndex.searchIndex('this')).toEqual([{
-        this: [0, 1]
-      }]);
-      expect(newIndex.searchIndex('inertia')).toEqual([{
-        inertia: 'Not Found'
-      }]);
-    });*/
   });
 });
