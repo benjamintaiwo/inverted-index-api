@@ -63,3 +63,9 @@ _gulp2.default.task('coverage', function () {
     }).pipe((0, _gulpExit2.default)());
   });
 });
+
+_gulp2.default.task('coveralls', ['run-test'], function () {
+  return _gulp2.default.src('coverage/lcov.info').pipe((0, _gulpCoveralls2.default)()).pipe((0, _gulpExit2.default)());
+});
+
+_gulp2.default.task('default', ['run-test', 'test', 'coveralls', 'coverage']);

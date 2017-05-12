@@ -100,8 +100,8 @@ describe('Inverted Index Suite', function () {
 
   describe('Get Index', function () {
     it('Ensures index is correct', function () {
-      expect(newIndex.getIndex('books')).toBeDefined();
-      expect(Object.keys(newIndex.getIndex('books')).length).toBe(22);
+      expect(newIndex.getIndex()).toBeDefined();
+      expect(Object.keys(newIndex.getIndex()).length).toBe(1);
     });
   });
 
@@ -110,29 +110,29 @@ describe('Inverted Index Suite', function () {
       expect(newIndex.searchIndex).toBeDefined();
     });
     it('Ensures index returns the correct results when searched', function () {
-      expect(newIndex.searchIndex('inquiry', 'books')).toEqual({
-        'inquiry': [0]
+      expect(newIndex.searchIndex('books', 'inquiry')).toEqual({
+        inquiry: [0]
       });
-      expect(newIndex.searchIndex('this', 'books')).toEqual({
-        'this': [0, 1]
+      expect(newIndex.searchIndex('books', 'this')).toEqual({
+        this: [0, 1]
       });
-      expect(newIndex.searchIndex('inertia', 'books')).toEqual({
-        'inertia': 'Not Found'
+      expect(newIndex.searchIndex('books', 'inertial')).toEqual({
+        inertial: 'Not Found'
       });
-      expect(newIndex.searchIndex('third first nations', 'books')).toEqual({
-        'third': [1],
-        'first': [1],
-        'nations': [0]
+      expect(newIndex.searchIndex('books', 'third first nations')).toEqual({
+        third: [1],
+        first: [1],
+        nations: [0]
       });
     });
-    it('Ensures it searches all indexed files if a filename/key is not passed', function () {
-      expect(newIndex.searchIndex('inquiry')).toEqual([{ 'inquiry': [0] }]);
+    /* it('Ensures it searches all indexed files if a filename/key is not passed', () => {
+      expect(newIndex.searchIndex('inquiry')).toEqual([{ inquiry: [0] }]);
       expect(newIndex.searchIndex('this')).toEqual([{
-        'this': [0, 1]
+        this: [0, 1]
       }]);
       expect(newIndex.searchIndex('inertia')).toEqual([{
-        'inertia': 'Not Found'
+        inertia: 'Not Found'
       }]);
-    });
+    });*/
   });
 });

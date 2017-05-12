@@ -57,3 +57,5 @@ gulp.task('coveralls', ['run-test'], () => {
     .pipe(coveralls())
     .pipe(exit());
 });
+
+gulp.task('default', ['run-test', 'test', 'coveralls', 'coverage']);

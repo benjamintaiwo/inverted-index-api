@@ -61,22 +61,16 @@ router.post('/api/create', function (req, res) {
       } else {
         var filePath = req.file.filename.toString();
         newIndex.createIndex(req.file.originalname, readFile(filePath));
-        res.json(newIndex.getIndex(req.file.originalname));
+        res.json(newIndex.getIndex());
       }
-      _fs2.default.unlinkSync(_path2.default.join('fixtures', req.file.filename)); // delete the uploaded file once the index is created
+      _fs2.default.unlinkSync(_path2.default.join('fixtures', req.file.filename));
+      // delete the uploaded file once the index is created
     }
   });
 });
 // search endpoint
-router.post('/api/search', function (req, res) {
-  if (req.body.fileName !== undefined) {
-    if (req.body.searchQuery.length === 0) {
-      res.json({ error: 'The searchTerms cannot be empty' });
-    } else {
-      newIndex.getIndex(req.file.originalname);
-      res.json(newIndex.searchIndex(req.body.searchQuery, newIndex.index));
-    }
-  }
+router.post('/api/search', search.single(), function (req, res) {
+  res.json(newIndex.searchIndex(req.body.fileName, req.body.searchQuery));
 });
 
 exports.default = router;

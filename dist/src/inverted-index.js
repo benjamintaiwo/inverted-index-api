@@ -7,8 +7,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /*  eslint linebreak-style: ["error", "windows"]*/
 /* eslint no-undef: "error"*/
 
-// import path from 'path';
-// import fs from 'fs';
 /**
  * Inverted index class
  */
@@ -22,8 +20,8 @@ var InvertedIndex = function () {
     // Object to hold the index
     this.index = {};
   }
-  /*
-   * method to convert words strings into an array
+  /**
+   * tokenize method to convert words strings into an array
    * @param{String} words - String to tokenize
    * @return{Array} list of words without of special characters or symbols
    */
@@ -32,20 +30,6 @@ var InvertedIndex = function () {
   _createClass(InvertedIndex, [{
     key: 'createIndex',
 
-
-    /**
-     * @description read the uploaded file
-     * @param {string} fileName
-     * @return {Object} content
-     */
-    /*static readFile(fileName) {
-      try {
-        JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
-      } catch (e) {
-        return 'Invalid JSON file';
-      }
-      return JSON.parse(fs.readFileSync(path.join('fixtures', fileName)));
-    }*/
 
     /**
      * method that create index for the documents in the file
@@ -84,20 +68,20 @@ var InvertedIndex = function () {
 
   }, {
     key: 'getIndex',
-    value: function getIndex(fileName) {
-      return this.index[fileName];
+    value: function getIndex() {
+      return this.index;
     }
 
     /**
      * method to search for words or sentence in the document
+     *  @param{String} fileName - fileIndex to query
      * @param{String} searchQuery - Words to search for
-     * @param{String} indexToSearch - Index to query
      * @return{Object} wordFound - Maps searched words to document locations
      */
 
   }, {
     key: 'searchIndex',
-    value: function searchIndex(searchQuery, indexToSearch) {
+    value: function searchIndex(fileName, searchQuery) {
       var _this = this;
 
       searchQuery = searchQuery.toLowerCase();
@@ -106,9 +90,9 @@ var InvertedIndex = function () {
       var searchTerms = InvertedIndex.uniqueWords(searchQuery);
       searchTerms.forEach(function (word) {
         var errorMessage = 'Not Found';
-        if (indexToSearch) {
+        if (fileName) {
           // eslint-disable-next-line
-          _this.index[indexToSearch][word] ? wordFound[word] = _this.index[indexToSearch][word] : wordFound[word] = errorMessage;
+          _this.index[fileName][word] ? wordFound[word] = _this.index[fileName][word] : wordFound[word] = errorMessage;
         } else {
           Object.keys(_this.index).forEach(function (key) {
             // eslint-disable-next-line
@@ -124,7 +108,7 @@ var InvertedIndex = function () {
   }], [{
     key: 'tokenize',
     value: function tokenize(words) {
-      return words.trim().replace(/-/g, ' ').replace(/[.,\/#!$%\^&@\*;:'{}=\_`~()]/g, '').toLowerCase().split(' ').sort();
+      return words.trim().replace(/-/g, ' ').replace(/[.,/#!$%^&@*;:'{}=_`~()]/g, '').toLowerCase().split(' ').sort();
     }
     /**
     * @param {any} content - file contents for searching.
