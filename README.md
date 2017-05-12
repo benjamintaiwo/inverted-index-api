@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/benjamintaiwo/inverted-index-api.svg?branch=develop)](https://travis-ci.org/benjamintaiwo/inverted-index-api)[![Coverage Status](https://coveralls.io/repos/github/benjamintaiwo/inverted-index-api/badge.svg?branch=master)](https://coveralls.io/github/benjamintaiwo/inverted-index-api?branch=master)
+[![Build Status](https://travis-ci.org/benjamintaiwo/inverted-index-api.svg?branch=develop)](https://travis-ci.org/benjamintaiwo/inverted-index-api)[![Coverage Status](https://coveralls.io/repos/github/benjamintaiwo/inverted-index-api/badge.svg?branch=master)](https://coveralls.io/github/benjamintaiwo/inverted-index-api?branch=master)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e455b847630c4307863f18cf0a4d8336)](https://www.codacy.com/app/benjamintaiwo/inverted-index-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=benjamintaiwo/inverted-index-api&amp;utm_campaign=Badge_Grade)
 # inverted-index-api
 
 # Introduction
